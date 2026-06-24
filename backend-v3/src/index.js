@@ -1,12 +1,14 @@
 'use strict';
 
 const express = require('express');
+const cors    = require('cors');
 const { env, printConfig } = require('./config/env');
 const { connectDB, isDBHealthy } = require('./config/db');
 const { handleIncoming } = require('./controllers/webhookController');
 const { ping: pingGemini } = require('./services/ai/geminiClient');
 const { setupGlobalHandlers, expressErrorHandler } = require('./middleware/errorHandler');
 const { verifyWebhookSignature } = require('./middleware/verifyWebhook');
+const apiRoutes = require('./routes/apiRoutes');
 const { createLogger } = require('./utils/logger');
 const log = createLogger('server');
 
@@ -15,12 +17,15 @@ printConfig(env);
 
 const app = express();
 
+app.use(cors());
 app.use(express.json({
     limit: '1mb',
     verify: (req, res, buf) => { req.rawBody = buf; },
 }));
 
 connectDB().catch(err => log.error('DB connect failed: ' + err.message));
+
+app.use('/api', apiRoutes);
 
 app.get('/', (req, res) => {
     res.json({

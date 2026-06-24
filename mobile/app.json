@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "MaalSaathi",
+    "slug": "maalsaathi",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "maalsaathi",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.maalsaathi.app",
+      "infoPlist": {
+        "NSSpeechRecognitionUsageDescription": "MaalSaathi needs speech recognition to let you log expenses and trips by voice.",
+        "NSMicrophoneUsageDescription": "MaalSaathi needs microphone access for voice input."
+      }
+    },
+    "android": {
+      "package": "com.maalsaathi.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#0B0D12",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": []
+  }
+}
